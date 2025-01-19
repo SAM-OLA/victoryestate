@@ -1,0 +1,48 @@
+{% include "header.html" %}
+<div class="px-4 pt-5 my-5 text-center border-bottom">
+    <h3>Residents Personal Information Form</h3>
+</div>
+        <!-- Main Content-->
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="my-5">
+                            <form action="/action_page.py">
+                                <div class="mb-3 mt-3">
+                                    <label for="surname" class="form-label">Surname:</label>
+                                    <input type="text" class="form-control" id="surname" placeholder="Enter surname" name="surname" required>
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="firstname" class="form-label">Firstname:</label>
+                                    <input type="text" class="form-control" id="firstname" placeholder="Enter firstname" name="firstname" required>
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="othername" class="form-label">Othernames:</label>
+                                    <input type="text" class="form-control" id="othername" placeholder="Enter othername" name="othername" required>
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="houseaddress" class="form-label">House Address: (house no and street name)</label>
+                                    <input type="text" class="form-control" id="houseaddress" placeholder="Enter house address" name="houseaddress" required>
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="mobilenumber" class="form-label">Mobile Number: (whatsapp)</label>
+                                    <input type="text" class="form-control" id="mobilenumber" placeholder="Enter mobilenumber" name="mobilenumber" required>
+                                </div>
+
+                                <div class="mb-3 mt-3">
+                                  <label for="uname" class="form-label">Username:</label>
+                                  <input type="text" class="form-control" id="uname" placeholder="Enter username" name="surname" required>
+                                </div>
+                                <div class="mb-3">
+                                  <label for="pwd" class="form-label">Password:</label>
+                                  <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+{% include "footer.html" %}
