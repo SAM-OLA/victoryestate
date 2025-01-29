@@ -8,7 +8,7 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="my-5">
-                            <form action="/action_page.py">
+                            <form action="{{ url_for('add') }}" method="POST">
                                 <div class="mb-3 mt-3">
                                     <label for="surname" class="form-label">Surname:</label>
                                     <input type="text" class="form-control" id="surname" placeholder="Enter surname" name="surname" required>

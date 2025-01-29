@@ -1,21 +1,40 @@
-from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String, Float
-import sqlite3
+from flask import Flask, render_template, request, redirect, url_for
+#from flask_sqlalchemy import SQLAlchemy
+#from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+#from sqlalchemy import Integer, String, Float
+#import sqlite3
+import psycopg2
 
 app = Flask(__name__)
 
-db = sqlite3.connect("victoryresidents.db")
-cursor = db.cursor()
-cursor.execute("CREATE TABLE register (id INTEGER PRIMARY KEY, surname varchar(100) NOT NULL, firstname varchar(100) NOT NULL, \
-               othernames varchar(100) NOT NULL, address varchar(250) NOT NULL, phonenumber varchar(100) NOT NULL)")
-class Base(DeclarativeBase):
-    pass
- 
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///victoryresidents.db"
-db = SQLAlchemy(model_class=Base)
-db.init_app(app)
+
+@app.route("/add", methods=["GET", "POST"])
+def add():
+    if request.method == "POST":
+        # CREATE RECORD
+        conn = psycopg2.connect(database="victoryestate", 
+                            user="postgres", 
+                            password="postgres", 
+                            host="localhost", port="5432") 
+        cur = conn.cursor() 
+        surname=request.form["surname"],
+        firstname=request.form["firstname"],
+        othernames=request.form["othername"],
+        address=request.form["houseaddress"],
+        phonenumber=request.form["mobilenumber"]
+        id = 1
+        cur.execute( 
+        '''INSERT INTO register 
+        (id,surname, firstname,othernames,address,phonenumber) VALUES (%s,%s, %s,%s, %s,%s)''', 
+        (id,surname, firstname,othernames,address,phonenumber)) 
+  
+        # commit the changes 
+        conn.commit() 
+  
+        # close the cursor and connection 
+        cur.close() 
+        conn.close() 
+        return f'Data Successfully aded for {surname}'+'*'*5
 
 @app.route('/')
 def home():
@@ -32,6 +51,15 @@ def contact_us():
 @app.route('/register')
 def register():
     return render_template("register.html")
+
+@app.route('/login')
+def login():
+    return render_template("login.html")
+
+
+@app.route('/feeslist')
+def feeslist():
+    return render_template("feeslist.html")
 
 @app.route('/<name>')
 def greet(name):
